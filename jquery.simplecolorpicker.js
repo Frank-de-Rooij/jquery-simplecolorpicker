@@ -124,12 +124,21 @@
     },
 
     showPicker: function() {
-      var pos = this.$icon.offset();
-      this.$picker.css({
-        // Remove some pixels to align the picker icon with the icons inside the dropdown
-        left: pos.left - 6,
-        top: pos.top + this.$icon.outerHeight()
-      });
+      var iconOffset = this.$icon.offset();
+      var alignOffset = 6;
+
+      if(this.options.pickerPosition === 'left') {
+        this.$picker.css({
+          right: $(document).width() - iconOffset.left - this.$icon.outerWidth(),
+          top:   iconOffset.top + this.$icon.outerHeight()
+        });
+      }
+      else {
+        this.$picker.css({
+          left: iconOffset.left - alignOffset,
+          top:  iconOffset.top + this.$icon.outerHeight()
+        });
+      }
 
       this.$picker.show(this.options.pickerDelay);
     },
